@@ -20,7 +20,7 @@ class HelloForm extends FormBase {
 
   //put your code here
   public function buildForm(array $form, FormStateInterface $form_state): array {
-    $form['job title'] = array(
+    $form['job_title'] = array(
       '#type' => 'textfield',
       '#title' => $this->t('Job Title'),
       '#description' => $this->t('Enter your job title. At least 5 chars in length, please, kind sir. Thank you. Come again.'),
