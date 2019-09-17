@@ -1,0 +1,8 @@
+## YAML Template.
+
+name: Hello
+type: module
+description: 'Say hello module'
+package: Learning
+version: 1.0
+core: '8.x'

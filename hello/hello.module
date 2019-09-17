@@ -1,0 +1,17 @@
+<?php
+
+use Drupal\user\Entity\User;
+
+function hello_hello_world() {
+  return '<div class="container">' .  t('Hello Drupal 8 waka waka') . '</div>';
+}
+
+function hello_welcome() {
+  $user = User::load(\Drupal::currentUser()->id());  
+  if ($user->get('uid')->value < 1) {    
+    return '<div class="container">' . t('Welcome stranger') . '</div>';
+  }
+  else {
+    return '<div class="container">' . t("Welcome " . $user->getUsername() . "!") . '</div>';
+  }
+}

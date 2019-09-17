@@ -1,0 +1,15 @@
+hello:
+  path: 'learning/hello'
+  defaults:
+    _controller: '\Drupal\hello\Controller\HelloController::helloNerds'
+    _title: 'Verhip'
+  requirements:
+    _permission: 'access content'
+    
+welcome:
+  path: 'learning/welcome'
+  defaults:
+    _controller: '\Drupal\hello\Controller\HelloController::welcome'
+    _title: 'Welcome'
+  requirements:
+    _permission: 'access content'
