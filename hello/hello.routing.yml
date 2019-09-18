@@ -28,3 +28,10 @@ welcome:
     _title: 'Welcome'
   requirements:
     _permission: 'access content'
+
+hello.create:
+  path: 'learning/hello/create-node'
+  defaults:
+    _controller: '\Drupal\hello\Controller\HelloController::create_node'
+  requirements:
+    _access: 'TRUE'
