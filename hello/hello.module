@@ -1,17 +1,44 @@
 <?php
 
 use Drupal\user\Entity\User;
+use Drupal\node\Entity\Node;
 
 function hello_hello_world() {
-  return '<div class="container">' .  t('Hello Drupal 8 waka waka') . '</div>';
+  return '<div class="container">' . t('Hello Drupal 8 waka waka') . '</div>';
 }
 
 function hello_welcome() {
-  $user = User::load(\Drupal::currentUser()->id());  
-  if ($user->get('uid')->value < 1) {    
+  $user = User::load(\Drupal::currentUser()->id());
+  if ($user->get('uid')->value < 1) {
     return '<div class="container">' . t('Welcome stranger') . '</div>';
   }
   else {
     return '<div class="container">' . t("Welcome " . $user->getUsername() . "!") . '</div>';
   }
+}
+
+function hello_create_node() {
+  $node = Node::create([
+        'type' => 'article',
+        'langcode' => 'en',
+        'created' => REQUEST_TIME,
+        'changed' => REQUEST_TIME,
+        'uid' => 1,
+        'title' => 'My test!',
+        'field_tags' => [1],
+        'body' => [
+          'summary' => '',
+          'value' => '<p>The body of the node</p>',
+          'format' => 'full_html',
+        ],
+  ]);
+  $node->save();
+  \Drupal::service('path.alias_storage')->save("/node/$node->id()", "/hello/learning/example-node", "en");
+  
+  $node_es = $node->addTranslation('es');
+  $node_es->title = 'Mi prueba!';
+  $node_es->body->value = '<p>El cuerpo de mi nodo.</p>';
+  $node_es->body_format = 'full_html';  
+  $node_es->save();
+  \Drupal::service('path.alias_storage')->save("/node/$node->id()", "/mi/ruta", "es");
 }
