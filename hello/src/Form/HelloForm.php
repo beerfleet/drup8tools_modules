@@ -201,11 +201,22 @@ class HelloForm extends FormBase {
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /*
-     * This would normally be replaced by code that actually does something with the title.
-     */
-    $job_title = $form_state->getValue('job_title');
-    drupal_set_message(t('You specified a job title of %job_title.', ['%job_title' => $job_title]));
-  }
+    // Find out what was submitted
+    $values = $form_state->getValues();
+    foreach ($values as $key => $value) {
+      $label = isset($form[$key]['#title']) ? $form[$key]['#title'] : $key;
 
+      // Many arrays return 0 for unselected vamues, filter these out !
+      if (is_array($value)) {
+        $value = array_filter($value);
+      }
+      
+      // Only display for controls with titles and values
+      if ($value && $label) {
+        $display_value = is_array($value) ? preg_replace('/[\n\r\s]+/', ' ', print_r($value, 1)) : $value;
+        $message = $this->t('Value for %title: %value', ['%title' => $label, '%value' => $display_value]);
+        drupal_set_message($message);
+      }
+    }
+  }
 }
