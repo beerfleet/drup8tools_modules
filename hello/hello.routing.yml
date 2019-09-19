@@ -36,9 +36,18 @@ hello.create:
   requirements:
     _access: 'TRUE'
     
+# has no menu item
 hello.createfile:
   path: 'learning/hello/create-file'
   defaults:
     _controller: '\Drupal\hello\Controller\HelloController::create_file'
+  requirements:
+    _access: 'TRUE'
+
+# no menu item
+hello.createnodefile:
+  path: 'learning/hello/createnodefile'
+  defaults:
+    _controller: '\Drupal\hello\Controller\HelloController::create_node_with_file'
   requirements:
     _access: 'TRUE'

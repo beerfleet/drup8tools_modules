@@ -29,4 +29,10 @@ class HelloController extends ControllerBase {
       '#markup' => hello_create_file(),
     ];
   }
+  
+  public function create_node_with_file() {
+    return [
+      '#markup' => hello_create_node_with_file()
+    ];
+  }
 }
