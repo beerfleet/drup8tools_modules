@@ -56,3 +56,27 @@ function hello_create_file() {
   $file->save();
   return t("File was created !!!");
 }
+
+function hello_create_node_with_file() {
+  $node = Node::create([
+    'type' => 'article',
+    'langcode' => 'en',
+    'created' => REQUEST_TIME,
+    'changed' => REQUEST_TIME,
+    'uid' => 1,
+    'title' => 'My title',
+    'field_tags' => [2],
+    'body' => [
+      'summary' => 'There is a node with a file being created.',
+      'value' => 'My node!',
+      'format' => 'full_html',
+    ],
+    'field_image' => [
+      'target_id' => 1,
+      'alt' => "My 'alt'",
+      'title' => "Mamahue"
+    ],
+  ]);
+  $node->save();
+  \Drupal::service('path.alias_storage')->save("/node/$node->id", '/learning/hello/nodewithfile', 'en');
+}
