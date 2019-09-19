@@ -17,11 +17,16 @@ class HelloController extends ControllerBase {
       '#markup' => hello_welcome(),
     ];
   }
-  
+
   public function create_node() {
     return [
       '#markup' => hello_create_node(),
     ];
   }
 
+  public function create_file() {
+    return [
+      '#markup' => hello_create_file(),
+    ];
+  }
 }

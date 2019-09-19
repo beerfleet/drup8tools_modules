@@ -2,6 +2,7 @@
 
 use Drupal\user\Entity\User;
 use Drupal\node\Entity\Node;
+use Drupal\file\Entity\File;
 
 function hello_hello_world() {
   return '<div class="container">' . t('Hello Drupal 8 waka waka') . '</div>';
@@ -43,4 +44,15 @@ function hello_create_node() {
   $node_es->body_format = 'full_html';  
   $node_es->save();
   \Drupal::service('path.alias_storage')->save("/node/$node->id()", "/mi/ruta", "es");
+}
+
+function hello_create_file() {
+  $file = File::create([
+    'uid' => 1,
+    'filename' => 'logo.png',
+    'uri' => 'public://page/logo.png',
+    'status' => 1,
+  ]);
+  $file->save();
+  return t("File was created !!!");
 }
