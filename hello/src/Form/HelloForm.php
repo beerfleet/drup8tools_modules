@@ -129,9 +129,9 @@ class HelloForm extends FormBase {
 
     // tableSelect
     $options = [
-      1 => ['first_name' => 'Indy', 'last_name' => 'Jones'],
-      2 => ['first_name' => 'Piercing', 'last_name' => 'Brosnandus'],
-      1 => ['first_name' => 'Agathaar', 'last_name' => 'Queestie'],
+      1 => ['first_name' => 'Aaron', 'last_name' => 'Hurst'],
+      2 => ['first_name' => 'Alan', 'last_name' => 'Greenspan'],
+      3 => ['first_name' => 'Agatha', 'last_name' => 'Christie'],
     ];
 
     $header = [
