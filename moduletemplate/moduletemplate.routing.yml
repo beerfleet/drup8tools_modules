@@ -1,0 +1,7 @@
+mymodule.moduletemplate:
+  path: /learning/moduletemplate/{word}
+  defaults:
+    _controller: '\Drupal\moduletemplate\Controller\ModuletemplateController::customPage'
+    _title: 'My new module template'
+  requirements:
+    _permission: 'access content'
