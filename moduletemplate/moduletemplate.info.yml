@@ -1,0 +1,5 @@
+name: New Module Template!
+type: module
+description: This is a template demo for creating a new module
+core: 8.x
+package: Learning
