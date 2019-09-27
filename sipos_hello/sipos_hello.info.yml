@@ -1,0 +1,9 @@
+name: Hello Sipos
+description: Hello Sipos moduleke
+type: module
+core: 8.x
+package: Learning
+dependencies:
+  - drupal:views
+  - ctools:ctools
+
