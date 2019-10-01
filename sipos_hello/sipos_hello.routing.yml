@@ -5,3 +5,11 @@ sipos_hello.hello:
     _title: 'Hello hello for ever and ever ...'
   requirements:
     _permission: 'access content'
+
+sipos_hello.greeting_form:
+  path: '/admin/config/salutation-configuration'
+  defaults:
+    _form: '\Drupal\sipos_hello\Form\SalutationConfigurationForm'
+    _title: 'Salutation Configuration shon shon'
+  requirements:
+    _permission: 'administer site configuration'
