@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormState;
 
 /**
  * Implements hook_help().
@@ -12,7 +13,27 @@ function sipos_hello_help($route_name, RouteMatchInterface $route_match) {
       $out .= '<h3>' . t('A boot :))') . '</h3>';
       $out .= '<p>' . t('Dees is een veurbiejld modoele.') . '</p>';
       return $out;
-      
+
     default:
   }
+}
+
+/**
+ * Implements hook_form_alter().
+
+  function sipos_hello_form_alter(&$form, $form_state, $form_id) {
+  if ($form_id == 'salutation_configuration_form') {
+  $form['salutation']['#default_value'] .= ' FORM ALTERED';
+  }
+  }
+ */
+
+
+/* EVEN BETTER */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function sipos_hello_form_salutation_configuration_form_alter(&$form, $form_state, $form_id) {
+  $form['salutation']['#default_value'] .= ' FORM ALTERED';
 }
