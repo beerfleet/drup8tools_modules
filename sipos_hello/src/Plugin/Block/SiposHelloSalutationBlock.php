@@ -15,11 +15,14 @@ use Drupal\sipos_hello\SiposHelloSalutation as SiposHelloSalutationService;
  * @Block(
  *   id = "sipos_hello_salutation_block",
  *   admin_label = @Translation("Sipos Hello Salutation"),
+ *   category = @Translation("Hello World"),
  * )
  */
 class SiposHelloSalutationBlock extends BlockBase implements ContainerFactoryPluginInterface {
-  /* @var \Drupal\sipos_hello\SiposHelloSalutation */
 
+  /**
+   *  @var \Drupal\sipos_hello\SiposHelloSalutation 
+   */
   protected $salutation;
 
   /**
@@ -40,15 +43,18 @@ class SiposHelloSalutationBlock extends BlockBase implements ContainerFactoryPlu
     $this->salutation = $salutation;
   }
 
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(array $configuration, $plugin_id, $plugin_definition, ContainerInterface $container) {
     return new static(
-      $configuration,
-      $plugin_id, 
-      $plugin_definition, 
-      $container->get('sipos_hello.salurtation')
+        $configuration, $plugin_id, $plugin_definition, $container->get('sipos_hello.salutation')
     );
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function build(): array {
     return [
       '#markup' => $this->salutation->getSalutation(),
