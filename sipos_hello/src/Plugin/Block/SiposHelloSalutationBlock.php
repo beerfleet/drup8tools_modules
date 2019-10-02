@@ -46,7 +46,7 @@ class SiposHelloSalutationBlock extends BlockBase implements ContainerFactoryPlu
   /**
    * {@inheritdoc}
    */
-  public static function create(array $configuration, $plugin_id, $plugin_definition, ContainerInterface $container) {
+  public static function create(ContainerInterface $container, $configuration, $plugin_id, $plugin_definition) {
     return new static(
         $configuration, $plugin_id, $plugin_definition, $container->get('sipos_hello.salutation')
     );
