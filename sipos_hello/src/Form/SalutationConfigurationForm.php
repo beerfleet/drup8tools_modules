@@ -8,6 +8,7 @@ namespace Drupal\sipos_hello\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * SalutationConfigurationForm definitie om de begroeting boodschap in te stellen.
@@ -39,6 +40,9 @@ class SalutationConfigurationForm extends ConfigFormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('sipos_hello.custom_salutation');
 
+    $form['#cache']['max-age'] = 0;
+    $form['#attributes']['novalidate'] = 'novalidate';
+
     $form['salutation'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Salutation'),
@@ -55,6 +59,26 @@ class SalutationConfigurationForm extends ConfigFormBase {
         ->save();
 
     parent::submitForm($form, $form_state);
+  }
+
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $form['#cache']['max-age'] = 0;
+    $salutation = $form_state->getValue('salutation');
+
+    if (strlen($salutation) > 20) {
+      $form_state->setErrorByName('salutation', 'Salutation is too long.');
+    }
+
+    // If validation errors, add inline errors
+    if ($errors = $form_state->getErrors()) {
+      $accessor = PropertyAccess::createPropertyAccessor();
+      foreach ($errors as $field => $error) {
+        if ($accessor->getValue($form, "[$field]")) {
+          $accessor->setValue($form, "[$field]" . '[#prefix]', '<div class="form-group error">');
+          $accessor->setValue($form, "[$field]" . '[#suffix]', '<div class="input-error-desc">' . $error . '</div></div>');
+        }
+      }
+    }
   }
 
 }
