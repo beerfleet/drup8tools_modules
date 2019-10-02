@@ -65,8 +65,8 @@ class SalutationConfigurationForm extends ConfigFormBase {
     $form['#cache']['max-age'] = 0;
     $salutation = $form_state->getValue('salutation');
 
-    if (strlen($salutation) < 4) {
-      $form_state->setErrorByName('salutation', 'Salutation is too short.');
+    if (strlen($salutation) > 20) {
+      $form_state->setErrorByName('salutation', 'Salutation is too long.');
     }
 
     // If validation errors, add inline errors

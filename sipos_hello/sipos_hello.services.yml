@@ -1,3 +1,4 @@
 services:
   sipos_hello.salutation:
     class: Drupal\sipos_hello\SiposHelloSalutation
+    arguments: ['@config.factory']

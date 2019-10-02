@@ -3,6 +3,7 @@
 namespace Drupal\sipos_hello;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Description of SiposHelloSalutation
@@ -14,9 +15,24 @@ class SiposHelloSalutation {
   use StringTranslationTrait;
 
   /**
+   * SiposHelloSalutation constructor.
+   *
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   */
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configFactory = $config_factory;
+  }
+
+  /**
    * Returns the salutation
    */
   public function getSalutation() {
+    $config = $this->configFactory->get('sipos_hello.custom_salutation');
+    $salutation = $config->get('salutation');
+    if ($salutation != "") {
+      return $salutation;
+    }
+    
     $time = new \DateTime();
 
     if ((int) $time->format('G') >= 00 && (int) $time->format('G') < 12) {
@@ -31,4 +47,5 @@ class SiposHelloSalutation {
       return $this->t('Good evening vampire peeps.');
     }
   }
+
 }
