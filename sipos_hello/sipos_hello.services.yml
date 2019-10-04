@@ -1,7 +1,7 @@
 services:
   sipos_hello.salutation:
     class: Drupal\sipos_hello\SiposHelloSalutation
-    arguments: ['@config.factory']
+    arguments: ['@config.factory','@event_dispatcher']
     
   sipos_hello.redirect_subscriber:
     class: Drupal\sipos_hello\EventSubscriber\SiposHelloRedirectSubscriber

@@ -4,6 +4,7 @@ namespace Drupal\sipos_hello;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * Description of SiposHelloSalutation
@@ -13,14 +14,21 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 class SiposHelloSalutation {
 
   use StringTranslationTrait;
-
+  
+  /**
+   * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+   */
+  protected $eventDispatcher;
+  
   /**
    * SiposHelloSalutation constructor.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   * @param \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher
    */
-  public function __construct(ConfigFactoryInterface $config_factory) {
+  public function __construct(ConfigFactoryInterface $config_factory, EventDispatcherInterface $event_dispatcher) {
     $this->configFactory = $config_factory;
+    $this->eventDispatcher = $event_dispatcher;
   }
 
   /**
@@ -30,7 +38,10 @@ class SiposHelloSalutation {
     $config = $this->configFactory->get('sipos_hello.custom_salutation');
     $salutation = $config->get('salutation');
     if ($salutation != "") {
-      return $salutation;
+      $event = new SiposHelloEvent();
+      $event->setValue($salutation);
+      $event = $this->eventDispatcher->dispatch(SiposHelloEvent::EVENT, $event);
+      return $event->getValue();
     }
     
     $time = new \DateTime();
