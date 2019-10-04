@@ -8,4 +8,8 @@ services:
     arguments: ['@current_user','@current_route_match']      
     tags:
       - { name: event_subscriber }
-  
+      
+  sipos_hello.modify_salutation:
+    class: Drupal\sipos_hello\EventSubscriber\SiposHelloModifySalutation    
+    tags:
+      - { name: event_subscriber }
