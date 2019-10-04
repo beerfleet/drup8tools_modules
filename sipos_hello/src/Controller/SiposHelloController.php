@@ -17,6 +17,9 @@ namespace Drupal\sipos_hello\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\sipos_hello\SiposHelloSalutation;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Core\Utility\LinkGenerator;
 
 /*
  * De route wordt gevonden, waarna deze controller wordt aangeroepen. Er wordt nagegaan of de 
@@ -31,19 +34,36 @@ class SiposHelloController extends ControllerBase {
    * @var \Drupal\sipos_hello\SiposHelloSalutation
    */
   protected $salutation;
+  
+  /**
+   * @var \Drupal\Core\Utility\LinkGenerator
+   */
+  protected $link_gen;
+  
+  /**
+   * @var \Drupal\Core\Link
+   */
+  protected $link;
 
   /**
    * SiposHelloController constructor
    * 
    * @param \Drupal\sipos_hello\SiposHelloSalutation $salutation
+   * @param \Drupal\Core\Link $link_generator
    */
-  public function __construct(SiposHelloSalutation $salutation) {
+  public function __construct(SiposHelloSalutation $salutation, LinkGenerator $link_generator) {
     $this->salutation = $salutation;
+    $this->link_gen = $link_generator;
+    $this->link = '';
   }
 
   public function sipos_hello() {
+    $config_url = Url::fromRoute('sipos_hello.greeting_form', []);
+    $this->link = $this->link_gen->generate('Whatever config', $config_url);
+    
     return [
-      '#markup' => $this->salutation->getSalutation(),
+      /* @var Drupal\Core\Link $link */
+      '#markup' => "<code>" . $this->salutation->getSalutation() . "</code>" . "<ul class='clearfix menu'><li class='menu-item'>$this->link</li></ul>",
     ];
   }
 
@@ -54,7 +74,8 @@ class SiposHelloController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-        $container->get('sipos_hello.salutation')
+        $container->get('sipos_hello.salutation'),
+        $container->get('link_generator')
     );
   }
 
