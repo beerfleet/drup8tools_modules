@@ -4,9 +4,11 @@ namespace Drupal\sipos_hello\EventSubscriber;
 
 use Drupal\Core\Session\AccountProxyInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\Core\Url;
+use Drupal\Core\Routing\LocalRedirectResponse;
 
 /**
  * Subscribes to the Kernel Request event and redirects to the homepage
@@ -15,22 +17,24 @@ use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 class SiposHelloRedirectSubscriber implements EventSubscriberInterface {
 
   /**
-   *
    * @var \Drupal\Core\Session\AccountProxy $currentUser
    */
   protected $currentUser;
+  
+  /**
+   * @var \Drupal\Core\Routing\CurrentRouteMatch $currentRoute
+   */
+  protected $currentRoute;
 
   /**
    * SiposHelloRedirectSubscriber constructor.
    *
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    */
-  public function __construct(AccountProxyInterface $current_user) {
+  public function __construct(AccountProxyInterface $current_user, CurrentRouteMatch $current_route_match) {
     //$this->currentUser = $current_user;
     $this->currentUser = $current_user;
-    echo '<pre>';
-    var_dump($current_user);
-    echo '</pre>';
+    $this->currentRoute = $current_route_match;
   }
 
   /**
@@ -44,7 +48,7 @@ class SiposHelloRedirectSubscriber implements EventSubscriberInterface {
      * van de interface zelf om na te gaan op welke manieren je voor een event 
      * kan registreren.
      */
-    $events['kernel.request'][] = ['onRequest', 1000];
+    $events[KernelEvents::REQUEST][] = ['onRequest', 0];
     return $events;
   }
 
@@ -54,15 +58,16 @@ class SiposHelloRedirectSubscriber implements EventSubscriberInterface {
    * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event
    */
   public function onRequest(GetResponseEvent $event) {
-    $request = $event->getRequest();
-    $path = $request->getPathInfo();
-    if ($path !== '/sipos/hello') {
+    $route_name = $this->currentRoute->getRouteName();
+    
+    if ($route_name !== 'sipos_hello.hello') {
       return;
     }
-
+    
     $roles = $this->currentUser->getRoles();
     if (in_array('persona_non_grata', $roles)) {
-      $event->setResponse(new RedirectResponse('/'));
+      $url = Url::fromUri('internal:/');
+      $event->setResponse(new LocalRedirectResponse($url->toString()));
     }
   }
 

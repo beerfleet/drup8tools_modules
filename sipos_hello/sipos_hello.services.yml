@@ -5,6 +5,7 @@ services:
     
   sipos_hello.redirect_subscriber:
     class: Drupal\sipos_hello\EventSubscriber\SiposHelloRedirectSubscriber
-    arguments: ['@current_user']
+    arguments: ['@current_user','@current_route_match']      
     tags:
       - { name: event_subscriber }
+  
