@@ -13,3 +13,23 @@ services:
     class: Drupal\sipos_hello\EventSubscriber\SiposHelloModifySalutation    
     tags:
       - { name: event_subscriber }
+ 
+  # Define my own LOGGING CHANNEL, in order to not have to inject the entire factory
+  sipos_hello.logger.channel.sipos_hello:
+    # The parent key means that our service will inherit the definition from another service.
+    # The used class is Drupal\Core\Logger\LoggerChannel (the default).
+    # See core.services.yml
+    parent: logger.channel_base    
+    # No @, such as above. Because here the argument is a string.
+    # Also: if the string is preceded and followed by a %, it denotes a parameter that 
+    # can be defined in any *.services.yml file
+    arguments: ['sipos_hello']
+
+  # Define my own logger. It is not enough to have the class definition. 
+  # The class has to be registered as a tagged service. The LoggingchannelFactory 
+  # will pick it up and pass it to the LOGGING CHANNEL when there is any logging 
+  # to be done.
+  sipos_hello.logger.sipos_hello:
+    class: Drupal\sipos_hello\Logger\SiposMailLogger
+    tags:
+      - { name: logger }

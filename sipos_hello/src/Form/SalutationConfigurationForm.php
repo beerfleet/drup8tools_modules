@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This entire page is a form page
+ * This entire page is a CONFIGURATION (/admin) form page
  */
 
 namespace Drupal\sipos_hello\Form;
@@ -9,6 +9,9 @@ namespace Drupal\sipos_hello\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * SalutationConfigurationForm definitie om de begroeting boodschap in te stellen.
@@ -17,6 +20,30 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * te bewaren.
  */
 class SalutationConfigurationForm extends ConfigFormBase {
+
+  protected $logger;
+
+  /**
+   * 
+   * @param ConfigFactoryInterface $config_factory
+   *  The factory for config objects
+   * @param LoggerChannelInterface $logger
+   *  The logger
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, LoggerChannelInterface $logger) {
+    parent::__construct($config_factory);
+    $this->logger = $logger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('config.factory'),
+      $container->get('sipos_hello.logger.channel.sipos_hello')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -54,19 +81,24 @@ class SalutationConfigurationForm extends ConfigFormBase {
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $previous_salutation = $this->config('sipos_hello.custom_salutation')
+        ->get('salutation');
+    
     $this->config('sipos_hello.custom_salutation')
         ->set('salutation', $form_state->getValue('salutation'))
         ->save();
 
     parent::submitForm($form, $form_state);
+
+    $this->logger->info('The Sipos Sello salutation has been changed from "@previous" to "@message".', ['@previous' => $previous_salutation, '@message' => $form_state->getValue('salutation')]);
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $form['#cache']['max-age'] = 0;
     $salutation = $form_state->getValue('salutation');
 
-    if (strlen($salutation) > 20) {
-      $form_state->setErrorByName('salutation', 'Salutation is too long.');
+    if (strlen($salutation) < 3) {
+      $form_state->setErrorByName('salutation', 'Salutation is too short.');
     }
 
     // If validation errors, add inline errors

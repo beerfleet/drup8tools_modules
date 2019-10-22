@@ -3,7 +3,6 @@
 namespace Drupal\sipos_hello\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Drupal\sipos_hello\SiposHelloEvent;
 
 /**
@@ -34,7 +33,7 @@ class SiposHelloModifySalutation implements EventSubscriberInterface {
    *   The dispatched event.
    */
   public function onGetSalutation(SiposHelloEvent $event) {
-    $event->setValue("WAKA WAKA SALUTATION TJAKKA");
+    // TODO: $event->setValue("WAKA WAKA SALUTATION TJAKKA");
   }
 
 }
