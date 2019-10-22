@@ -13,3 +13,14 @@ services:
     class: Drupal\sipos_hello\EventSubscriber\SiposHelloModifySalutation    
     tags:
       - { name: event_subscriber }
+ 
+  sipos_hello.logger.channel.sipos_hello:
+    # The parent key means that our service will inherit the definition from another service.
+    # The used class is Drupal\Core\Logger\LoggerChannel (the default).
+    # See core.services.yml
+    parent: logger.channel_base    
+    # No @, such as above. Because here the argument is a string.
+    # Also: if the string is preceded and followed by a %, it denotes a parameter that 
+    # can be defined in any *.services.yml file
+    arguments: ['sipos_hello']
+
