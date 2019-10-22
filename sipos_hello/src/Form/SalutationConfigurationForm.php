@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This entire page is a form page
+ * This entire page is a CONFIGURATION (/admin) form page
  */
 
 namespace Drupal\sipos_hello\Form;
@@ -9,6 +9,9 @@ namespace Drupal\sipos_hello\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Logger\LoggerChannelInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * SalutationConfigurationForm definitie om de begroeting boodschap in te stellen.
@@ -17,6 +20,21 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * te bewaren.
  */
 class SalutationConfigurationForm extends ConfigFormBase {
+
+  protected $logger;
+
+  /**
+   * 
+   * @param ConfigFactoryInterface $config_factory
+   *  The factory for config objects
+   * @param LoggerChannelInterface $logger
+   *  The logger
+   */
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    parent::__construct($config_factory);    
+  }
+
+
 
   /**
    * {@inheritdoc}
@@ -59,6 +77,8 @@ class SalutationConfigurationForm extends ConfigFormBase {
         ->save();
 
     parent::submitForm($form, $form_state);
+    
+    //$this->logger->info('The Sipos Sello salutation has been changed to @message.', ['@message' => $form_state->getValue('salutation')]);
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
