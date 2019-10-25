@@ -31,5 +31,6 @@ services:
   # to be done.
   sipos_hello.logger.sipos_hello:
     class: Drupal\sipos_hello\Logger\SiposMailLogger
+    arguments: ['@logger.log_message_parser', '@config.factory']
     tags:
       - { name: logger }
