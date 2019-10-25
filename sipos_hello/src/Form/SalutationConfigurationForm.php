@@ -91,6 +91,9 @@ class SalutationConfigurationForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
 
     $this->logger->info('The Sipos Sello salutation has been changed from "@previous" to "@message".', ['@previous' => $previous_salutation, '@message' => $form_state->getValue('salutation')]);
+    
+    /* This is an entry point for the SiposMailLogger functionality */
+    $this->logger->error('THIS IS AN ERROR LOG TO MAIL MAYBE ...?', ['@previous' => $previous_salutation, '@message' => $form_state->getValue('salutation')]);
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {

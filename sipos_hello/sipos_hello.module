@@ -37,3 +37,16 @@ function sipos_hello_help($route_name, RouteMatchInterface $route_match) {
 function sipos_hello_form_salutation_configuration_form_alter(&$form, $form_state, $form_id) {
   $form['salutation']['#default_value'] .= ' FORM ALTERED';
 }
+
+/**
+ * Implements hook_mail().
+ */
+function sipos_hello_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'sipos_hello_log':
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('There is an error on your website');
+      $message['body'][] = $params['message'];
+      break;
+  }
+}
