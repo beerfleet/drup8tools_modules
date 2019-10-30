@@ -40,8 +40,7 @@ class SalutationConfigurationForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('config.factory'),
-      $container->get('sipos_hello.logger.channel.sipos_hello')
+        $container->get('config.factory'), $container->get('sipos_hello.logger.channel.sipos_hello')
     );
   }
 
@@ -83,7 +82,7 @@ class SalutationConfigurationForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $previous_salutation = $this->config('sipos_hello.custom_salutation')
         ->get('salutation');
-    
+
     $this->config('sipos_hello.custom_salutation')
         ->set('salutation', $form_state->getValue('salutation'))
         ->save();
@@ -91,16 +90,18 @@ class SalutationConfigurationForm extends ConfigFormBase {
     parent::submitForm($form, $form_state);
 
     $this->logger->info('The Sipos Sello salutation has been changed from "@previous" to "@message".', ['@previous' => $previous_salutation, '@message' => $form_state->getValue('salutation')]);
-    
+
     /* This is an entry point for the SiposMailLogger functionality */
-    $this->logger->error('THIS IS AN ERROR LOG TO MAIL MAYBE ...?', ['@previous' => $previous_salutation, '@message' => $form_state->getValue('salutation')]);
+    //$this->logger->error('THIS IS AN ERROR LOG TO MAIL MAYBE ...?', ['@previous' => $previous_salutation, '@message' => $form_state->getValue('salutation')]);
+    $token_replacement = \Drupal::token()->replace('The salutation text is:[sipos_hello:salutation]');
+    $this->logger->error("ERROR LOG TO MAIL: token replacement: $token_replacement", []);
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $form['#cache']['max-age'] = 0;
     $salutation = $form_state->getValue('salutation');
 
-    if (strlen($salutation) < 3) {
+    if (strlen($salutation) != 0 && strlen($salutation) < 3) {
       $form_state->setErrorByName('salutation', 'Salutation is too short.');
     }
 
