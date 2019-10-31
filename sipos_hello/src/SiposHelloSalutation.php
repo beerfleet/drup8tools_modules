@@ -58,5 +58,35 @@ class SiposHelloSalutation {
       return $this->t('Good evening vampire peeps.');
     }
   }
+  
+  /**
+   * Returns the Salutation render array.
+   */
+  public function getSalutationComponent() {
+    $render = [
+      '#theme' => 'sipos_hello_salutation',
+    ];
+    $config = $this->configFactory->get('sipos_hello.custom_salutation');
+    $salutation = $config->get('salutation');
+    if ($salutation != "") {
+      $render['#salutation'] = $salutation;
+      $render['#overridden'] = TRUE;
+      return $render;
+    }
+    $time = new \DateTime();
+    $render['#target'] = $this->t('world');
+    if ((int) $time->format('G') >= 00 && (int) $time->format('G') < 12) {
+      $render['#salutation'] = $this->t('Good morning');
+      return $render;
+    }
+    if ((int) $time->format('G') >= 12 && (int) $time->format('G') < 18) {
+      $render['#salutation'] = $this->t('Good afternoon');
+      return $render;
+    }
+    if ((int) $time->format('G') >= 18) {
+      $render['#salutation'] = $this->t('Good evening');
+      return $render;
+    }
+  }
 
 }

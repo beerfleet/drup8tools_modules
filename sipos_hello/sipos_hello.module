@@ -106,3 +106,37 @@ function sipos_hello_tokens($type, $tokens, array $data, array $options, \Drupal
   }
   return $replacements;
 }
+
+/**
+ * Implements hook_theme().
+ */
+function sipos_hello_theme($existing, $type, $theme, $path) {
+  return [
+    'sipos_hello_salutation' => [
+      // template with the name sipos-hello-salutation.html.twig inside the /templates
+      //folder of our module
+      'variables' => ['salutation' => NULL, 'target' => NULL, 'overridden'
+        => FALSE],
+    ],
+  ];
+}
+
+/**
+ * Default preprocessor function for the sipos_hello_salutation theme hook.
+ */
+function template_preprocess_sipos_hello_salutation(&$variables) {
+  $variables['attributes'] = [
+    'class' => ['salutation'],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function sipos_hello_theme_suggestions_sipos_hello_salutation($variables) {
+  $suggestions = [];
+  if ($variables['overridden'] == TRUE) {
+    $suggestions[] = 'sipos_hello_salutation__overridden';
+  }
+  return $suggestions;
+}
