@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function sipos_hello_install() {
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get('interface');
+  if (in_array('sipos_hello', array_keys($mail_plugins))) {
+    return;
+  }
+  $mail_plugins['sipos_hello'] = 'sipos_hello_mail';
+  //$config->set('interface', $mail_plugins)->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function sipos_hello_uninstall() {
+  $config = \Drupal::configFactory()->getEditable('system.mail');
+  $mail_plugins = $config->get('interface');
+  if (!in_array('sipos_hello', array_keys($mail_plugins))) {
+    return;
+  }
+  unset($mail_plugins['sipos_hello']);
+  //$config->set('interface', $mail_plugins)->save();
+}

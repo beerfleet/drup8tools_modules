@@ -66,6 +66,15 @@ class SiposHelloController extends ControllerBase {
       '#markup' => "<code>" . $this->salutation->getSalutation() . "</code>" . "<ul class='clearfix menu'><li class='menu-item'>$this->link</li></ul>",
     ];
   }
+  
+  /**
+   * Hello World.
+   *
+   * @return array
+   
+  public function sipos_hello() {
+    return $this->salutation->getSalutationComponent();
+  }*/
 
   /*
    * Typisch gebruik van dependency injection pattern, is deze create() method.
