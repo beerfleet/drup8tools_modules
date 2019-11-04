@@ -140,3 +140,16 @@ function sipos_hello_theme_suggestions_sipos_hello_salutation($variables) {
   }
   return $suggestions;
 }
+
+
+/** Include css library only in sipos_hello pages **/
+
+/**
+ * Implements hook_page_attachments().
+ */
+function sipos_hello_page_attachments(&$attachments) {
+  $path = \Drupal::service('path.current')->getPath();
+  if ($path == '/sipos/hello') {
+    $attachments['#attached']['library'][] = 'sipos_hello/sipos-library';
+  }
+}
