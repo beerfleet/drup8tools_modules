@@ -1,0 +1,10 @@
+sipos_hello.page:
+  route_name: sipos_hello.hello
+  title: 'Sipos Hello'
+  base_route: sipos_hello.hello
+  
+sipos_hello.config:
+  route_name: sipos_hello.greeting_form
+  title: 'Configuration'
+  base_route: sipos_hello.hello
+  weight: 100

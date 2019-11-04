@@ -2,7 +2,7 @@ sipos_hello.hello:
   path: '/sipos/hello'
   defaults:
     _controller: '\Drupal\sipos_hello\Controller\SiposHelloController::sipos_hello'
-    _title: 'Hello hello for ever and ever ...'
+    _title: 'Sipos Hello Page Title'
   requirements:
     _permission: 'access content'
 
