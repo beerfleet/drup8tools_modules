@@ -3,5 +3,5 @@ hello_world.hello:
   description: 'Get your dynamic salutation.'
   route_name: sipos_hello.hello
   menu_name: main
-  weight: 0
+  weight: 200
   
