@@ -1,0 +1,4 @@
+sipos_hello.override:
+  title: 'Override'
+  route_name: sipos_hello.greeting_form
+  group: sipos_hello

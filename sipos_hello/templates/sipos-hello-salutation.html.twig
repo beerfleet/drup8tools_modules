@@ -1,6 +1,8 @@
 <div {{ attributes }}>
+  {{ title_prefix }} {# START contextual link #}
   {{ salutation }}
   {% if target %}
-    <span class="salutation—target">{{ target }}</span>
+    <span class="salutation--target">{{ target }}</span>
   {% endif %}
+  {{ title_suffix }} {# END contextual link #}
 </div>

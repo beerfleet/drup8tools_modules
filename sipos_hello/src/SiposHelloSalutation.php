@@ -65,26 +65,33 @@ class SiposHelloSalutation {
   public function getSalutationComponent() {
     $render = [
       '#theme' => 'sipos_hello_salutation',
+      '#salutation' => [
+        '#contextual_links' => [
+          'sipos_hello' => [
+            'route_parameters' => []
+          ],
+        ]
+      ]
     ];
     $config = $this->configFactory->get('sipos_hello.custom_salutation');
     $salutation = $config->get('salutation');
     if ($salutation != "") {
-      $render['#salutation'] = $salutation;
+      $render['#salutation']['#markup'] = $salutation;
       $render['#overridden'] = TRUE;
       return $render;
     }
     $time = new \DateTime();
     $render['#target'] = $this->t('world');
     if ((int) $time->format('G') >= 00 && (int) $time->format('G') < 12) {
-      $render['#salutation'] = $this->t('Good morning');
+      $render['#salutation']['#markup'] = $this->t('Good morning');
       return $render;
     }
     if ((int) $time->format('G') >= 12 && (int) $time->format('G') < 18) {
-      $render['#salutation'] = $this->t('Good afternoon');
+      $render['#salutation']['#markup'] = $this->t('Good afternoon');
       return $render;
     }
     if ((int) $time->format('G') >= 18) {
-      $render['#salutation'] = $this->t('Good evening');
+      $render['#salutation']['#markup'] = $this->t('Good evening');
       return $render;
     }
   }
