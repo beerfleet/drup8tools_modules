@@ -57,25 +57,26 @@ class SiposHelloController extends ControllerBase {
     $this->link = '';
   }
 
-  public function sipos_hello() {
-    $config_url = Url::fromRoute('sipos_hello.greeting_form', []);
-    $this->link = $this->link_gen->generate('Whatever config', $config_url);
-    
-    return [
-      /* @var Drupal\Core\Link $link */
-      '#markup' => "<code>" . $this->salutation->getSalutation() . "</code>" . "<ul class='clearfix menu'><li class='menu-item'>$this->link</li></ul>",
-    ];
-  }
+//  public function sipos_hello() {
+//    $config_url = Url::fromRoute('sipos_hello.greeting_form', []);
+//    $this->link = $this->link_gen->generate('Whatever config', $config_url);
+//    
+//    return [
+//      /* @var Drupal\Core\Link $link */
+//      '#markup' => "<code>" . $this->salutation->getSalutation() . "</code>" . "<ul class='clearfix menu'><li class='menu-item'>$this->link</li></ul>",
+//    ];
+//  }
   
   /**
    * Hello World.
    *
    * @return array
-   
+   */
   public function sipos_hello() {
     return $this->salutation->getSalutationComponent();
-  }*/
-
+  }
+  
+  
   /*
    * Typisch gebruik van dependency injection pattern, is deze create() method.
    * Let wel: NOOIT DE VOLLEDIGE CONTAINER DOORGEVEN.
