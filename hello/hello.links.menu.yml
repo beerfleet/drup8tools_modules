@@ -25,3 +25,10 @@ hello.modal:
   route_name: hello.modal
   expanded: TRUE
   weight: 130
+  
+hello.todo:
+  title: Hello Todo Form
+  menu_name: main
+  route_name: hello.todo
+  expanded: TRUE
+  weight: 140
