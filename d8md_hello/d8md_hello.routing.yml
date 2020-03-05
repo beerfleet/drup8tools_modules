@@ -13,3 +13,11 @@ d8md_hello.insult:
     _title: 'Insultation'
   requirements:
     _permission: 'access content'
+    
+d8md_hello.hi_form:
+  path: '/admin/config/d8md-hi-config'
+  defaults:
+    _form: 'Drupal\d8md_hello\Form\HiConfigForm'
+    _title: 'Hi configuration'
+  requirements:
+    _permission: 'administer site configuration'
