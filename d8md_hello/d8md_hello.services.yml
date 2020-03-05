@@ -1,0 +1,5 @@
+services:
+  d8md_hello.salutation:
+    class: Drupal\d8md_hello\HelloWorldSalutation
+    tags:
+      - {name: tag_name}

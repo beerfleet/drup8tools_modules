@@ -3,5 +3,13 @@ d8md_hello.hi:
   defaults:
     _controller: '\Drupal\d8md_hello\Controller\HiController::hi'
     _title: 'My first hi'
-    _requirements:
-      _permission: 'access content'
+  requirements:
+    _permission: 'access content'
+
+d8md_hello.insult:
+  path: '/d8md/insult/{person}'  
+  defaults:
+    _controller: '\Drupal\d8md_hello\Controller\HiController::insultation'
+    _title: 'Insultation'
+  requirements:
+    _permission: 'access content'
