@@ -1,0 +1,7 @@
+bam.hello_world:
+  path: '/bam/hello'
+  defaults:
+    _controller: '\Drupal\bam_glue\Controller\GlueController::helloWorldPage'
+  requirements:
+    _permission: 'access content'
+    

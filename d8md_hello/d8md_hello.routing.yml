@@ -1,0 +1,7 @@
+d8md_hello.hi:
+  path: '/d8md/hi'
+  defaults:
+    _controller: '\Drupal\d8md_hello\Controller\HiController::hi'
+    _title: 'My first hi'
+    _requirements:
+      _permission: 'access content'

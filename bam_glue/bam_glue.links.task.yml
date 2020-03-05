@@ -1,0 +1,4 @@
+bam.hello_world.list:
+  route_name: bam.hello_world
+  title: 'Hello horse'
+  parent_id: 'bam.hello_world'
