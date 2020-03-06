@@ -13,7 +13,8 @@ d8md_hello.insult:
     _title: 'Insultation'
   requirements:
     _permission: 'access content'
-    
+
+# config
 d8md_hello.hi_form:
   path: '/admin/config/d8md-hi-config'
   defaults:
