@@ -11,11 +11,11 @@ namespace Drupal\d8md_hello;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 
 /**
- * Description of HelloWorldSalutation
+ * Description of HiSalutation
  *
  * @author jvanbiervliet
  */
-class HelloWorldSalutation {
+class HiSalutation {
 
   use StringTranslationTrait;
 
