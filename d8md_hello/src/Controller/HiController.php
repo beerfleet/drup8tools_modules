@@ -4,7 +4,7 @@ namespace Drupal\d8md_hello\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\HttpFoundation\Response;
-use Drupal\d8md_hello\HelloWorldSalutation;
+use Drupal\d8md_hello\HiSalutation;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -19,9 +19,9 @@ class HiController extends ControllerBase {
   /**
    * HelloWorldController constructor.
    *
-   * @param \Drupal\hello_world\HelloWorldSalutation $salutation
+   * @param \Drupal\hello_world\HiSalutation $salutation
    */
-  public function __construct(HelloWorldSalutation $salutation) {
+  public function __construct(HiSalutation $salutation) {
     $this->salutation = $salutation;
   }
 
@@ -30,7 +30,7 @@ class HiController extends ControllerBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-        $container->get('d8md_hello.salutation')
+        $container->get('d8md_hello.hi')
     );
   }
 
@@ -40,7 +40,7 @@ class HiController extends ControllerBase {
    * @return array
    */
   function hi() {
-    /* @var HelloWorldSalutation $this->salutation */
+    /* @var HiSalutation $this->salutation */
     return [
       '#markup' => $this->salutation->getSalutation(),
     ];

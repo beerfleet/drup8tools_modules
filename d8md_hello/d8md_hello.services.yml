@@ -1,5 +1,5 @@
 services:
-  d8md_hello.salutation:
-    class: Drupal\d8md_hello\HelloWorldSalutation
+  d8md_hello.hi:
+    class: Drupal\d8md_hello\HiSalutation
     tags:
       - {name: tag_name}
