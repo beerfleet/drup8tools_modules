@@ -9,6 +9,7 @@
 namespace Drupal\d8md_hello;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\Core\Config\ConfigFactoryInterface;
 
 /**
  * Description of HiSalutation
@@ -18,48 +19,59 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 class HiSalutation {
 
   use StringTranslationTrait;
+  
+  /* @var  ConfigFactoryInterface $configfactory */
+  protected $configfactory;
+  
+  public function __construct(ConfigFactoryInterface $config_factory) {
+    $this->configfactory = $config_factory;
+  }
 
   /**
    * Returns the salutation
    */
   public function getSalutation() {
+    $conf = $this->configfactory->get('d8md_hello.custom_hi');
+    $salutation = $conf->get('salutation');
+    if ($salutation != "") {
+      return $salutation;
+    }
+    
     $keuze = rand(1, 10);
-    $grut = 'NOTHING';
-
     switch ($keuze) {
       case 1:
-        $grut = 'Yo, bro';
+        $salutation = 'Yo, bro';
         break;
       case 2:
-        $grut = 'Arigato, comegato';
+        $salutation = 'Arigato, comegato';
         break;
       case 3:
-        $grut = 'Hoi the\'re';
+        $salutation = 'Hoi the\'re';
         break;
       case 4:
-        $grut = 'Sakondis';
+        $salutation = 'Sakondis';
         break;
       case 5:
-        $grut = 'Huh ?';
+        $salutation = 'Huh ?';
         break;
       case 6:
-        $grut = 'Hola Compadre';
+        $salutation = 'Hola Compadre';
         break;
       case 7:
-        $grut = 'No spiki Engrish';
+        $salutation = 'No spiki Engrish';
         break;
       case 8:
-        $grut = 'Goedendaag';
+        $salutation = 'Goedendaag';
         break;
       case 9:
-        $grut = 'Bonsour';
+        $salutation = 'Bonsour';
         break;
       case 10:
-        $grut = 'Astalavista, baby';
+        $salutation = 'Astalavista, baby';
         break;
     }
 
-    return $this->t($grut);
+    return $this->t($salutation);
   }
 
 }
