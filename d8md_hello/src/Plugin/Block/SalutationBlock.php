@@ -10,9 +10,8 @@ namespace Drupal\d8md_hello\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\d8md_hello\HiSalutation;
+use Drupal\d8md_hello\HiSalutation as HiSalutationService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\hello_world\HiSalutation as HiSalutationService;
 
 /**
  * D8md_hello Salutation block.
@@ -22,7 +21,7 @@ use Drupal\hello_world\HiSalutation as HiSalutationService;
  * admin_label = @Translation("Hi salutation"),
  * )
  */
-class HelloWorldSalutationBlock extends BlockBase implements
+class SalutationBlock extends BlockBase implements
 ContainerFactoryPluginInterface {
 
   /**
