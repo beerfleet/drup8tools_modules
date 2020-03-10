@@ -14,7 +14,7 @@ use Drupal\d8md_hello\HiSalutation as HiSalutationService;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * D8md_hello Salutation block.
+ * d8md_hello Salutation block.
  *
  * @Block(
  * id = "d8md_hello_salutation_block",
@@ -35,14 +35,13 @@ ContainerFactoryPluginInterface {
    * Construct.
    *
    * @param array $configuration
-   * A configuration array containing information about the plugin
-    instance.
+   * A configuration array containing information about the plugin instance.
    * @param string $plugin_id
    * The plugin_id for the plugin instance.
    * @param string $plugin_definition
    * The plugin implementation definition.
-   * @param \Drupal\d8md_hello\HiSalutation $salutation * The
-    salutation service.
+   * @param \Drupal\d8md_hello\HiSalutation $salutation 
+   * The salutation service.
    */
   public function __construct(array $configuration, $plugin_id,
     $plugin_definition, HiSalutationService $salutation) {
