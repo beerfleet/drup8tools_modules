@@ -1,0 +1,7 @@
+oef_raadgetal.start:
+  path: '/oef/start'
+  defaults:
+    _controller: '\Drupal\oef_raadgetal\Controller\RaadGetalController::start'
+    _title: 'RAAD GETAL - start'
+  requirements:
+    _permission: 'access content'
