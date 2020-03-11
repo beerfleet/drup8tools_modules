@@ -6,7 +6,7 @@
 function oef_raadgetal_theme() {
   $theme['oef_raadgetal_start_pagina'] = [
     'render element' => 'build',
-    'template' => 'oef_raadgetal_start_raden.html.twig'
+    'template' => 'oef_raadgetal_start_raden'
   ];
   
   return $theme;
