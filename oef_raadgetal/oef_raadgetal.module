@@ -4,7 +4,7 @@
  * Implements hook_theme().
  */
 
-function oef_raadgetal_theme() {
+function oef_raadgetal_theme($existing, $type, $theme, $path) {
   $theme = [
     'oef_raadgetal_basis_template' => [
       'render element' => 'build',
@@ -16,7 +16,6 @@ function oef_raadgetal_theme() {
     ],
     'oef_raadgetal_raad_form' => [
       'render element' => 'form',
-      'template' => 'oef_raadgetal_start_raden'
     ]
   ];
   

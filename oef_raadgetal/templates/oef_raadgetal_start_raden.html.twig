@@ -1,6 +1,7 @@
 {% extends 'oef_raadgetal_basis_template.html.twig' %}
 
-{% block hoofd %}  
+{% block hoofd %}
+  {{ dump() }}
 {% endblock hoofd %}  
 
 {% block content %}
@@ -11,13 +12,17 @@
         Raad een getal tussen 1 en 10 !
       </p>
     </div>
-    
+
     <div class="uitvoer">
       ?
     </div>
-    
+
     <div class="invoer">
-      {{ form.form }}
+      {% if form is defined %}
+        {{ form.form }}
+      {% else %}
+        <div>WAAR IS DE FORM ???</div>
+      {% endif %}
     </div>
   </div>
 

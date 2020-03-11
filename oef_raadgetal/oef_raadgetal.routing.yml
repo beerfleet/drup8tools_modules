@@ -5,3 +5,10 @@ oef_raadgetal.start:
     _title: 'RAAD GETAL - start'
   requirements:
     _permission: 'access content'
+
+oef_raadgetal.form:
+  defaults:
+    _title: 'Raad het getal'
+    _form: '\Drupal\oef_raadgetal\Form\RaadGetalForm'
+  requirements:
+    _permission: 'access content'
