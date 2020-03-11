@@ -1,0 +1,18 @@
+<?php
+
+/*
+ * Implements hook_theme().
+ */
+function oef_raadgetal_theme() {
+  $theme['oef_raadgetal_basis_template'] = [
+    'render element' => 'build',
+    'template' => 'oef_raadgetal_basis_template'
+  ];
+  
+  $theme['oef_raadgetal_start_pagina'] = [
+    'render element' => 'build',
+    'template' => 'oef_raadgetal_start_raden'
+  ];
+  
+  return $theme;
+}
