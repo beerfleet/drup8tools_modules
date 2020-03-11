@@ -1,0 +1,5 @@
+name: "Oefening: Raad een getal"
+description: Raad een getal tussen 1 en 10
+package: Oefeningen
+type: module
+core: 8.x
