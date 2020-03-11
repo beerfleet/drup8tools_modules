@@ -18,7 +18,8 @@ use \Drupal\Core\Controller\ControllerBase;
 class RaadGetalController extends ControllerBase {
 
   function start() {
-    
+    $build['#theme'] = 'oef_raadgetal_start_pagina';
+    return $build;
   }
 
 }
