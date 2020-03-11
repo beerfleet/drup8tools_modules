@@ -18,7 +18,11 @@ use \Drupal\Core\Controller\ControllerBase;
 class RaadGetalController extends ControllerBase {
 
   function start() {
-    $build['#theme'] = 'oef_raadgetal_start_pagina';
+    $raad_form = \Drupal::formBuilder()->getForm('Drupal\oef_raadgetal\Form\RaadGetalForm');
+    $build = [
+      '#theme' => 'oef_raadgetal_start_pagina',
+      '#form' => $raad_form,
+    ];
     return $build;
   }
 
