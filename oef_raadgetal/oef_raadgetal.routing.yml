@@ -7,6 +7,7 @@ oef_raadgetal.start:
     _permission: 'access content'
 
 oef_raadgetal.form:
+  path: '/oef/raad_form'
   defaults:
     _title: 'Raad het getal'
     _form: '\Drupal\oef_raadgetal\Form\RaadGetalForm'

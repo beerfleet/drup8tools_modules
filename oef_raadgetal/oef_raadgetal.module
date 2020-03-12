@@ -5,7 +5,7 @@
  */
 
 function oef_raadgetal_theme($existing, $type, $theme, $path) {
-  $theme = [
+  return [
     'oef_raadgetal_basis_template' => [
       'render element' => 'build',
       'template' => 'oef_raadgetal_basis_template',
@@ -14,10 +14,9 @@ function oef_raadgetal_theme($existing, $type, $theme, $path) {
       'render element' => 'build',
       'template' => 'oef_raadgetal_start_raden'
     ],
-    'oef_raadgetal_raad_form' => [
+    'oef_raadgetal_form' => [
       'render element' => 'form',
+      'template' => 'oef_raadgetal_start_raden'
     ]
   ];
-  
-  return $theme;
 }
