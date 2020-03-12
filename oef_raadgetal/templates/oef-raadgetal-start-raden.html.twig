@@ -1,7 +1,7 @@
-{% extends 'oef_raadgetal_basis_template.html.twig' %}
+{% extends 'oef-raadgetal-basis-template.html.twig' %}
 
 {% block hoofd %}
-  
+
 {% endblock hoofd %}  
 
 {% block content %}
@@ -18,8 +18,12 @@
     </div>
 
     <div class="invoer">
+     {# <pre>        
+        {{ dump(_context|keys) }}        
+      </pre>#}
+
       {% if form is defined %}
-        {{ form.form }}
+        {{ form }}
       {% else %}
         <div>WAAR IS DE FORM ???</div>
       {% endif %}
