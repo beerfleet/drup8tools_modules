@@ -8,15 +8,14 @@ function oef_raadgetal_theme($existing, $type, $theme, $path) {
   return [
     'oef_raadgetal_basis_template' => [
       'render element' => 'build',
-      'template' => 'oef_raadgetal_basis_template',
+      'template' => 'oef-raadgetal-basis-template',
     ],
     'oef_raadgetal_start_pagina' => [
       'render element' => 'build',
-      'template' => 'oef_raadgetal_start_raden'
+      'template' => 'oef-raadgetal-start-raden'
     ],
     'oef_raadgetal_form' => [
       'render element' => 'form',
-      'template' => 'oef_raadgetal_start_raden'
     ]
   ];
 }
