@@ -21,7 +21,7 @@ class RaadGetalController extends ControllerBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\oef_raadgetal\Form\RaadGetalForm');
     $build = [
       '#theme' => 'oef_raadgetal_start_pagina',
-      '#form' => $form,
+      '#mijn_form' => $form,
     ];
     return $build;
   }
