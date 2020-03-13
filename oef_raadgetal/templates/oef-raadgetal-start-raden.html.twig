@@ -21,16 +21,21 @@
       {# <pre>        
          {{ dump(_context|keys) }}        
        </pre>#}
-
       {% if mijn_form is defined %}
-        {#        {{ mijn_form }}#}
-        <div class="form-group">
-          {{ mijn_form.getal.title }}
-          {{ mijn_form.getal }}
-        </div>
-        {#     <pre>
-               {{ dump(mijn_form.getal.title|keys) }}
-             </pre>#}
+        <form {{ attributes }}>
+          {{ form.form_build_id }}
+          {{ form.form_token }}
+          {{ form.form_id }}
+          {#          <pre>{{ dump(mijn_form|keys) }}</pre>#}
+          <div class="form-group">
+            {{ mijn_form.getal.title }}
+            {{ mijn_form.getal }}
+          </div>
+          <div class="form-group">
+
+            {{ mijn_form.actions.submit }}
+          </div>
+        </form>
       {% else %}
         <div>Er is een probleem met de form.</div>
       {% endif %}
