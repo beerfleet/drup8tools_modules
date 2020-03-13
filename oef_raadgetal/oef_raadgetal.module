@@ -3,7 +3,6 @@
 /*
  * Implements hook_theme().
  */
-
 function oef_raadgetal_theme($existing, $type, $theme, $path) {
   return [
     'oef_raadgetal_basis_template' => [
