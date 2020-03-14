@@ -1,2 +1,4 @@
 services:
-  oef_raadgetal.logica
+  oef_raadgetal.logica:
+    class: Drupal\oef_raadgetal\RaadGetalServices
+    arguments: ['@state']
