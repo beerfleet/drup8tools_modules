@@ -59,5 +59,8 @@ class RaadGetalForm extends FormBase {
     foreach ($form_state->getValues() as $key => $value) {
       \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format' ? $value['value'] : $value));
     }
+    
+    /* need service */
+    
   }
 }
