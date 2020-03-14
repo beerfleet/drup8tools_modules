@@ -18,14 +18,26 @@
     </div>
 
     <div class="invoer">
-     {# <pre>        
-        {{ dump(_context|keys) }}        
-      </pre>#}
-
+      {# <pre>        
+         {{ dump(_context|keys) }}        
+       </pre>#}
       {% if mijn_form is defined %}
-        {{ mijn_form }}
+        <form {{ attributes }}>
+          {{ form.form_build_id }}
+          {{ form.form_token }}
+          {{ form.form_id }}
+          {#          <pre>{{ dump(mijn_form|keys) }}</pre>#}
+          <div class="form-group">
+            {{ mijn_form.getal.title }}
+            {{ mijn_form.getal }}
+          </div>
+          <div class="form-group">
+
+            {{ mijn_form.actions.submit }}
+          </div>
+        </form>
       {% else %}
-        <div>WAAR IS DE FORM ???</div>
+        <div>Er is een probleem met de form.</div>
       {% endif %}
     </div>
   </div>
