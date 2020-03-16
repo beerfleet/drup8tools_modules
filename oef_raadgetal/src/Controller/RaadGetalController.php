@@ -30,9 +30,10 @@ class RaadGetalController extends ControllerBase {
     $build = [
       '#theme' => 'oef_raadgetal_start_pagina',
       '#mijn_form' => $form,
+      '#services' => $this->services,
     ];
     return $build;
-  }
+  }  
 
   public static function create(ContainerInterface $container) {
     $services = $container->get('oef_raadgetal.logica');

@@ -12,6 +12,7 @@ function oef_raadgetal_theme($existing, $type, $theme, $path) {
       'template' => 'oef-raadgetal-start-raden',
       'variables' => [
         'mijn_form' => NULL,
+        'services' => NULL,
       ]
     ],
   ];
