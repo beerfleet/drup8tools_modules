@@ -27,7 +27,6 @@ class RaadGetalController extends ControllerBase {
 
   function start() {
     /* @var Drupal\oef_raadgetal\RaadGetalServices $services */
-    $this->services->
     $form = \Drupal::formBuilder()->getForm('Drupal\oef_raadgetal\Form\RaadGetalForm');
     $build = [
       '#theme' => 'oef_raadgetal_start_pagina',
@@ -37,7 +36,7 @@ class RaadGetalController extends ControllerBase {
   }
 
   public static function create(ContainerInterface $container) {
-    $services = $container->get('oef_raadgetal.services');
+    $services = $container->get('oef_raadgetal.logica');
 //    parent::create($container);
     return new static($services);
   }
