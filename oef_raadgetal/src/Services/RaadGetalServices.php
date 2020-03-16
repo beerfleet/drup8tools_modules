@@ -36,5 +36,9 @@ class RaadGetalServices {
   function get_random_number() {
     return \Drupal::state()->get(self::GETAL);
   }
+  
+  function get_pogingen() {
+    return \Drupal::state()->get(self::POGINGEN);
+  }
 
 }
