@@ -18,11 +18,17 @@ class RaadGetalServices {
     $this->init_state();
   }
 
-  function init_state() {
-    $this->set_random_number();
+  function reset_state() {
+    $this->set_initial_values();
   }
 
-  function set_random_number() {
+  function init_state() {
+    if (null === \Drupal::state()->get(self::GETAL)) {
+      $this->set_initial_values();
+    }
+  }
+
+  function set_initial_values() {
     \Drupal::state()->set(self::GETAL, rand(1, 10));
     \Drupal::state()->set(self::POGINGEN, 3);
   }
