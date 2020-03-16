@@ -19,17 +19,17 @@
     </div>
 
     <div class="invoer">
-      
-   {#   <pre>        
-         {{ dump(_context|keys) }}        
-       </pre>#}
-   
+
+    {#   <pre>        
+          {{ dump(_context|keys) }}        
+        </pre>#}
+
       {% if mijn_form is defined %}
-        <form {{ attributes }}>
+        <form {{ attributes.setAttribute('novalidate','novalidate') }}>
           {{ form.form_build_id }}
           {{ form.form_token }}
           {{ form.form_id }}
-          
+
           <div class="form-group">
             {{ mijn_form.getal.title }}
             {{ mijn_form.getal }}
