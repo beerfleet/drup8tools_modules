@@ -10,7 +10,7 @@ namespace Drupal\oef_raadgetal\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\oef_raadgetal\RaadGetalServices;
+use Drupal\oef_raadgetal\Services\RaadGetalServices;
 
 /**
  * RaadGetalController
@@ -26,7 +26,6 @@ class RaadGetalController extends ControllerBase {
   }
 
   function start() {
-    /* @var Drupal\oef_raadgetal\RaadGetalServices $services */
     $form = \Drupal::formBuilder()->getForm('Drupal\oef_raadgetal\Form\RaadGetalForm');
     $build = [
       '#theme' => 'oef_raadgetal_start_pagina',

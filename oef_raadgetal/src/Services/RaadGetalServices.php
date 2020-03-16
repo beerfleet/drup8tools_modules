@@ -14,6 +14,10 @@ class RaadGetalServices {
   const GETAL = "raad_getal_waarde";
   const POGINGEN = "raad_getal_pogingen";
 
+  public function __construct() {
+    $this->init_state();
+  }
+
   function init_state() {
     $this->set_random_number();
   }
@@ -22,13 +26,9 @@ class RaadGetalServices {
     \Drupal::state()->set(self::GETAL, rand(1, 10));
     \Drupal::state()->set(self::POGINGEN, 3);
   }
-  
+
   function get_random_number() {
     return \Drupal::state()->get(self::GETAL);
-  }
-
-  public function __construct() {
-    $this->init_state();
   }
 
 }
