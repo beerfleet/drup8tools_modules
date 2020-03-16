@@ -34,6 +34,11 @@ class RaadGetalController extends ControllerBase {
     ];
     return $build;
   }  
+  
+  function reset() {
+    $this->services->reset_state();
+    return $this->redirect('oef_raadgetal.start');
+  }
 
   public static function create(ContainerInterface $container) {
     $services = $container->get('oef_raadgetal.logica');

@@ -5,6 +5,14 @@ oef_raadgetal.start:
     _title: 'RAAD GETAL - start'
   requirements:
     _permission: 'access content'
+    
+oef_raadgetal.reset:
+  path: '/oef/reset'
+  defaults:
+    _controller: '\Drupal\oef_raadgetal\Controller\RaadGetalController::reset'
+    _title: 'RAAD GETAL - start'
+  requirements:
+    _permission: 'access content'
 
 oef_raadgetal.form:
   path: '/oef/raad_form'
