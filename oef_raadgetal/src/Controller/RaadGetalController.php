@@ -9,6 +9,8 @@
 namespace Drupal\oef_raadgetal\Controller;
 
 use \Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\oef_raadgetal\RaadGetalServices;
 
 /**
  * RaadGetalController
@@ -16,27 +18,27 @@ use \Drupal\Core\Controller\ControllerBase;
  * @author jvanbiervliet
  */
 class RaadGetalController extends ControllerBase {
-  
-  const GETAL = "raad_getal_waarde";
-  const POGINGEN = "raad_getal_pogingen";
 
-  function init_state() {
-    $this->set_random_number();
-  }
+  protected $services;
 
-  function set_random_number() {
-    \Drupal::state()->set(self::GETAL, rand(1,10));
-    \Drupal::state()->set(self::POGINGEN, 3);
+  function __construct($services) {
+    $this->services = $services;
   }
 
   function start() {
-    $this->init_state();
+    /* @var Drupal\oef_raadgetal\RaadGetalServices $services */
     $form = \Drupal::formBuilder()->getForm('Drupal\oef_raadgetal\Form\RaadGetalForm');
     $build = [
       '#theme' => 'oef_raadgetal_start_pagina',
       '#mijn_form' => $form,
     ];
     return $build;
+  }
+
+  public static function create(ContainerInterface $container) {
+    $services = $container->get('oef_raadgetal.logica');
+//    parent::create($container);
+    return new static($services);
   }
 
 }
