@@ -20,15 +20,24 @@
 
     <div class="invoer">
 
-    {#   <pre>        
-          {{ dump(_context|keys) }}        
-        </pre>#}
 
       {% if mijn_form is defined %}
-        <form {{ attributes.setAttribute('novalidate','novalidate') }}>
-          {{ form.form_build_id }}
-          {{ form.form_token }}
-          {{ form.form_id }}
+        <form 
+          {{ attributes.addClass('oef-raadgetal-form') }} 
+          {{ attributes.setAttribute('novalidate','novalidate') }}
+          {{ attributes.setAttribute('data-drupal-selector','oef-raadgetal-form') }}          
+          {{ attributes.setAttribute('action','/oef/start') }}
+          {{ attributes.setAttribute('method','post') }}
+          {{ attributes.setAttribute('data-drupal-form-fields','edit-getal,edit-submit') }}
+          >
+          
+      {#<pre>        
+        {{ dump(_context|keys) }}        
+      </pre>#}
+      
+          {{ mijn_form.form_build_id }}
+          {{ mijn_form.form_token }}
+          {{ mijn_form.form_id }}
 
           <div class="form-group">
             {{ mijn_form.getal.title }}
