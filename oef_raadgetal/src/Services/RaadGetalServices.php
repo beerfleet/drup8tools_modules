@@ -14,21 +14,31 @@ class RaadGetalServices {
   const GETAL = "raad_getal_waarde";
   const POGINGEN = "raad_getal_pogingen";
 
-  function init_state() {
-    $this->set_random_number();
+  public function __construct() {
+    $this->init_state();
   }
 
-  function set_random_number() {
+  function reset_state() {
+    $this->set_initial_values();
+  }
+
+  function init_state() {
+    if (null === \Drupal::state()->get(self::GETAL)) {
+      $this->set_initial_values();
+    }
+  }
+
+  function set_initial_values() {
     \Drupal::state()->set(self::GETAL, rand(1, 10));
     \Drupal::state()->set(self::POGINGEN, 3);
   }
-  
-  function get_random_number() {
+
+  function get_getal() {
     return \Drupal::state()->get(self::GETAL);
   }
-
-  public function __construct() {
-    $this->init_state();
+  
+  function get_pogingen() {
+    return \Drupal::state()->get(self::POGINGEN);
   }
 
 }

@@ -14,19 +14,22 @@
     </div>
 
     <div class="uitvoer">
-      ?
+      <div class="uitvoer-getal">GETAL: {{ services.get_getal }}</div>
+      <div class="uitvoer-pogingen">POGINGEN: {{ services.get_pogingen }}</div>
     </div>
 
     <div class="invoer">
-      {# <pre>        
-         {{ dump(_context|keys) }}        
-       </pre>#}
+
+    {#   <pre>        
+          {{ dump(_context|keys) }}        
+        </pre>#}
+
       {% if mijn_form is defined %}
-        <form {{ attributes }}>
+        <form {{ attributes.setAttribute('novalidate','novalidate') }}>
           {{ form.form_build_id }}
           {{ form.form_token }}
           {{ form.form_id }}
-          {#          <pre>{{ dump(mijn_form|keys) }}</pre>#}
+
           <div class="form-group">
             {{ mijn_form.getal.title }}
             {{ mijn_form.getal }}

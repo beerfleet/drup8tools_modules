@@ -4,6 +4,8 @@ namespace Drupal\oef_raadgetal\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\oef_raadgetal\Services\RaadGetalServices;
 
 /**
  * RaadGetalForm
@@ -11,6 +13,12 @@ use Drupal\Core\Form\FormStateInterface;
  * @author jvanbiervliet
  */
 class RaadGetalForm extends FormBase {
+
+  protected $services;
+
+  function __construct($services) {
+    $this->services = $services;
+  }
 
   /**
    * {@inheritdoc}
@@ -59,8 +67,11 @@ class RaadGetalForm extends FormBase {
     foreach ($form_state->getValues() as $key => $value) {
       \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format' ? $value['value'] : $value));
     }
-    
-    /* need service */
-    
   }
+
+  public static function create(ContainerInterface $container) {
+    $services = $container->get('oef_raadgetal.logica');
+    return new static($services);
+  }
+
 }
