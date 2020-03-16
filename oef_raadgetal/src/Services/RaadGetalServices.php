@@ -33,7 +33,7 @@ class RaadGetalServices {
     \Drupal::state()->set(self::POGINGEN, 3);
   }
 
-  function get_random_number() {
+  function get_getal() {
     return \Drupal::state()->get(self::GETAL);
   }
   
