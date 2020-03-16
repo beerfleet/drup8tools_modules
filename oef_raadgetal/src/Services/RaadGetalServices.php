@@ -37,8 +37,26 @@ class RaadGetalServices {
     return \Drupal::state()->get(self::GETAL);
   }
   
+  function verminder_pogingen() {
+    $aantal_pogingen = $this->get_pogingen();
+    if ($aantal_pogingen > 0) {
+      $aantal_pogingen -= 1;
+      $this->set_pogingen($aantal_pogingen);
+    }
+  }
+  
+  function set_pogingen($aantal) {
+    \Drupal::state()->set(self::POGINGEN, $aantal);
+  }
+
   function get_pogingen() {
     return \Drupal::state()->get(self::POGINGEN);
+  }
+
+  function try($getal) {
+    if ($getal != $this->get_getal()) {
+      $this->verminder_pogingen();
+    }
   }
 
 }
