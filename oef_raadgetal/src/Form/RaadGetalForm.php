@@ -54,8 +54,14 @@ class RaadGetalForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $getal = $form_state->getValue('getal');
+    
+    if (!is_numeric($getal)) {
+      $form_state->setErrorByName('getal', "Je moet een getal opgeven !");
+    }
+    
     if ($getal < 0 || $getal > 10) {
-      $form_state->setErrorByName('getal', "Getal moet tussen 1 en 10 zijn");
+      $form_state->setErrorByName('getal', "Je moet een getal tussen 1 en 10 opgeven !");
+
     }
     parent::validateForm($form, $form_state);
   }

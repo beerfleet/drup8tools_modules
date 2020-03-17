@@ -25,32 +25,7 @@
       </div>
       
       {% if mijn_form is defined %}
-        <form 
-          {{ attributes.addClass('oef-raadgetal-form') }} 
-{#          {{ attributes.setAttribute('novalidate','novalidate') }}#}
-          {{ attributes.setAttribute('data-drupal-selector','oef-raadgetal-form') }}          
-          {{ attributes.setAttribute('action','/oef/start') }}
-          {{ attributes.setAttribute('method','post') }}
-          {{ attributes.setAttribute('data-drupal-form-fields','edit-getal,edit-submit') }}
-          >
-          
-      {#<pre>        
-        {{ dump(_context|keys) }}        
-      </pre>#}
-      
-          {{ mijn_form.form_build_id }}
-          {{ mijn_form.form_token }}
-          {{ mijn_form.form_id }}
-
-          <div class="form-group">
-            {{ mijn_form.getal.title }}
-            {{ mijn_form.getal }}
-          </div>
-          <div class="form-group">
-
-            {{ mijn_form.actions.submit }}
-          </div>
-        </form>
+        {{ mijn_form }}
       {% else %}
         <div>Er is een probleem met de form.</div>
       {% endif %}
